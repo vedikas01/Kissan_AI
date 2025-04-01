@@ -1,0 +1,68 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer's Chatbot - Language Selection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Choose Your Language</h1>
+        </div>
+
+        <div class="language-options">
+            <form action="/set_language" method="post">
+                {% for language_name, language_code in languages.items() %}
+                <div class="language-option">
+                    <input type="radio" id="{{ language_code }}" name="language" value="{{ language_code }}">
+                    <label for="{{ language_code }}">{{ language_name }}</label>
+                </div>
+                {% endfor %}
+                <button type="submit" class="continue-btn">Continue</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer's Chatbot - Language Selection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Choose Your Language</h1>
+        </div>
+
+        <div class="language-options">
+            <form action="/set_language" method="post">
+                <div class="language-buttons">
+                    {% for language_name, language_code in languages.items() %}
+                    <button type="button" class="language-button" data-lang="{{ language_code }}" onclick="selectLanguage('{{ language_code }}')">
+                        {{ language_name }}
+                    </button>
+                    {% endfor %}
+                </div>
+                <input type="hidden" name="language" id="selected-language">
+                <button type="submit" class="continue-btn">Continue</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function selectLanguage(langCode) {
+            document.querySelectorAll('.language-button').forEach(button => button.classList.remove('selected'));
+            document.querySelector(`.language-button[data-lang="${langCode}"]`).classList.add('selected');
+            document.getElementById('selected-language').value = langCode;
+        }
+    </script>
+</body>
+</html>
